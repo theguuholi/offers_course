@@ -1,15 +1,3 @@
-![logo-quero-edu-small](https://user-images.githubusercontent.com/1139813/90247813-c9cfc780-de0d-11ea-9a97-485a7212d9dd.png)
-
-## Objetivo
-
-O Quero Bolsa é um marketplace de bolsas de estudo, que já ajudou milhares de alunos a escolher e ingressar no curso ideal, por um preço que podem pagar. A sua missão é criar uma API para exibição e filtragem de ofertas de curso.
-
-## Requisitos do Projeto
-
-- Apenas código backend será considerado.
-- Para a sua solução, temos uma preferência forte pelo uso de Ruby, Elixir ou Node.js. Você também poderá usar a linguagem e framework que esteja mais familiarizado.
-- Você poderá usar bibliotecas de testes unitários ou ferramentas de build/migrations disponíveis para a linguagem que você escolher, mas não será aceita a utilização de bibliotecas com o propósito de resolver o problema.
-
 ## Especificações das Funcionalidades
 
 - Automatize a inserção de dados fictícios para uso em ambiente de desenvolvimento. :ok
