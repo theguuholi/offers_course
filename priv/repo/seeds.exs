@@ -13,4 +13,5 @@
       |> Map.delete("course")
 
     OffersCourse.Services.ScholarShips.execute(scholar_ship, campus, course, university)
-  end)
+    course
+  end) |> Enum.count() |> IO.inspect()
