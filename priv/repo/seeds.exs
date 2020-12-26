@@ -16,12 +16,15 @@ defmodule Insert do
 
       Map.put(university, "campus", campus)
     end)
+
+    universidades
   end
 
   def constroi_cursos({campus, cursos}) do
     cursos =
       cursos
       |> Enum.map(fn curso ->
+        curso |> IO.inspect()
         curso = Map.delete(curso, "campus")
         new_course = curso["course"]
         oferta = curso |> Map.delete("course")
@@ -37,8 +40,11 @@ offers =
   |> Jason.decode!()
 
 offers
-|> Insert.build_offers()
-|> Enum.each(&OffersCourse.Services.ScholarShips.execute/1)
+|> Enum.group_by(& &1["university"])
+|> Enum.count()
+|> IO.inspect()
+# |> Insert.build_offers()
+# |> Enum.each(&OffersCourse.Services.ScholarShips.execute/1)
 
 IO.inspect(
   "Ofertas #{
@@ -54,7 +60,6 @@ IO.inspect(
     |> Enum.count()
   }"
 )
-
 
 IO.inspect(
   "Facu #{
