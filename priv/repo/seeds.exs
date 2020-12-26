@@ -22,11 +22,9 @@ defmodule Insert do
     cursos = cursos
     |> Enum.map(fn curso ->
       curso = Map.delete(curso, "campus")
-
       new_course = curso["course"]
       oferta = curso |> Map.delete("course")
-      new_course
-      # curso = Map.put(new_course, "scolarships", [oferta])
+      Map.put(new_course, "scolarships", [oferta])
     end)
     Map.put(campus, "courses", cursos)
   end
