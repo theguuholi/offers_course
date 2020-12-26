@@ -19,19 +19,47 @@ defmodule Insert do
   end
 
   def constroi_cursos({campus, cursos}) do
-    cursos = cursos
-    |> Enum.map(fn curso ->
-      curso = Map.delete(curso, "campus")
-      new_course = curso["course"]
-      oferta = curso |> Map.delete("course")
-      Map.put(new_course, "scolarships", [oferta])
-    end)
+    cursos =
+      cursos
+      |> Enum.map(fn curso ->
+        curso = Map.delete(curso, "campus")
+        new_course = curso["course"]
+        oferta = curso |> Map.delete("course")
+        Map.put(new_course, "scolarships", [oferta])
+      end)
+
     Map.put(campus, "courses", cursos)
   end
 end
 
-File.read!("db.json")
-|> Jason.decode!()
+offers =
+  File.read!("db.json")
+  |> Jason.decode!()
+
+offers
 |> Insert.build_offers()
 |> Enum.each(&OffersCourse.Services.ScholarShips.execute/1)
-|> IO.inspect()
+
+IO.inspect(
+  "Ofertas #{
+    offers
+    |> Enum.count()
+  }"
+)
+
+IO.inspect(
+  "Campus #{
+    offers
+    |> Enum.uniq_by(& &1["campus"]["name"])
+    |> Enum.count()
+  }"
+)
+
+
+IO.inspect(
+  "Facu #{
+    offers
+    |> Enum.uniq_by(& &1["university"]["name"])
+    |> Enum.count()
+  }"
+)
