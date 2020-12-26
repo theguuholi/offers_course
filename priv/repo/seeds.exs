@@ -26,21 +26,5 @@ end)
 
   Map.put(university, "campus", campus)
 end)
-# |> List.first()
-# |> IO.inspect()
-|> OffersCourse.Services.ScholarShips.execute()
-
-# campus = scholar_ship["campus"]
-# course = scholar_ship["course"]
-# university = scholar_ship["university"]
-
-# scholar_ship =
-#   scholar_ship
-#   |> Map.delete("university")
-#   |> Map.delete("campus")
-#   |> Map.delete("course")
-
-# OffersCourse.Services.ScholarShips.execute(scholar_ship, campus, course, university)
-# course
-# |> Enum.count()
+|> Enum.each(&OffersCourse.Services.ScholarShips.execute/1)
 |> IO.inspect()
