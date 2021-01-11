@@ -8,6 +8,6 @@ defmodule OffersCourse.Repo.Migrations.CreateCampus do
       add :university_id, references(:universities, on_delete: :nilify_all, on_update: :nilify_all)
       timestamps()
     end
-    create(unique_index(:campus, [:name]))
+    # create(unique_index(:campus, [:name]))
   end
 end
