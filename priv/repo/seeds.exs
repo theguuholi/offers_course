@@ -3,27 +3,20 @@ defmodule Insert do
     offers
     |> Enum.group_by(& &1["university"], &Map.delete(&1, "university"))
     |> Map.to_list()
-    |> Enum.map(fn {university, offers} ->
-      Map.put(university, "campus", build_campus(offers))
-    end)
+    |> Enum.map(fn {u, o} -> Map.put(u, "campus", build_campus(o)) end)
   end
 
   def build_campus(offers) do
     offers
-    |> Enum.group_by(& &1["campus"], fn offer ->
-      course =
-        offer
-        |> Map.get("course")
-
-      offer = offer |> Map.delete("course") |> Map.delete("campus")
-
-      Map.put(course, "scolarships", [offer])
-    end)
+    |> Enum.group_by(& &1["campus"], &build_offer/1)
     |> Map.to_list()
-    |> Enum.map(fn {campus, courses} ->
-      campus
-      |> Map.put("courses", courses)
-    end)
+    |> Enum.map(fn {campus, courses} -> Map.put(campus, "courses", courses) end)
+  end
+
+  def build_offer(offer) do
+    course = Map.get(offer, "course")
+    offer = offer |> Map.delete("course") |> Map.delete("campus")
+    Map.put(course, "scolarships", [offer])
   end
 end
 
